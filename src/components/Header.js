@@ -4,20 +4,21 @@ import { getUser } from '../services/userAPI';
 
 class Header extends React.Component {
   state = {
-    loadingHeader: false,
+    loadingHeader: true,
     loginName: '',
   };
 
   componentDidMount() {
+    this.gettingUser();
+  }
+
+  gettingUser = async () => {
+    const loginUser = await getUser();
     this.setState({
-      loadingHeader: true,
-    });
-    const loginUser = getUser();
-    this.setState({
-      loginName: loginUser,
+      loginName: loginUser.name,
       loadingHeader: false,
     });
-  }
+  };
 
   render() {
     const { loadingHeader, loginName } = this.state;
@@ -25,7 +26,7 @@ class Header extends React.Component {
       loadingHeader ? <Loading />
         : (
           <header data-testid="header-component">
-            <p data-testid="header-user-name">{ loginName.name }</p>
+            <p data-testid="header-user-name">{loginName}</p>
           </header>)
     );
   }
