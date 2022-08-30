@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 import Album from './pages/Album';
 import Favorites from './pages/Favorites';
+import Loading from './pages/Loading';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
@@ -11,8 +12,10 @@ import { createUser } from './services/userAPI';
 
 class App extends React.Component {
   state = {
-    name: '',
+    loginName: '',
     disableButton: true,
+    loading: false,
+    savedLoginName: false,
   };
 
   handleChange = ({ target }) => {
@@ -29,8 +32,15 @@ class App extends React.Component {
     }
   };
 
+  handleLogin = async () => {
+    const { loginName } = this.state;
+    this.setState({ loading: true });
+    await createUser({ name: loginName });
+    this.setState({ savedLoginName: true, });
+  };
+
   render() {
-    const { name, disableButton } = this.state;
+    const { loginName, disableButton, loading, savedLoginName } = this.state;
     return (
       <BrowserRouter>
         <Route path="/album/:id" component={ Album } />
@@ -41,10 +51,12 @@ class App extends React.Component {
         <Route
           path="/"
           render={ () => (<Login
-            name={ name }
+            name={ loginName }
             disableButton={ disableButton }
-            createUser={ createUser }
+            handleLogin={ this.handleLogin }
             onInputChange={ this.handleChange }
+            loading={ loading }
+            savedLoginName={ savedLoginName }
           />) }
         />
         <Route path="*" component={ NotFound } />

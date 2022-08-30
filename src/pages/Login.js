@@ -1,27 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import Loading from './Loading';
 
 class Login extends React.Component {
   render() {
-    const { name, disableButton, createUser, onInputChange } = this.props;
+    const { loginName, disableButton, handleLogin,
+      onInputChange, loading, savedLoginName } = this.props;
     return (
-      <div data-testid="page-login">
-        <input
-          name="name"
-          type="text"
-          data-testid="login-name-input"
-          onChange={ onInputChange }
-          value={ name }
-        />
-        <button
-          type="button"
-          data-testid="login-submit-button"
-          disabled={ disableButton }
-          onClick={ () => createUser({ name }) }
-        >
-          Entrar
-        </button>
-      </div>
+      savedLoginName ? <Redirect to="/search" />
+        : (
+          <div data-testid="page-login">
+            {loading ? <Loading />
+              : (
+                <form>
+                  <input
+                    name="loginName"
+                    type="text"
+                    data-testid="login-name-input"
+                    onChange={ onInputChange }
+                    value={ loginName }
+                  />
+                  <button
+                    type="button"
+                    data-testid="login-submit-button"
+                    disabled={ disableButton }
+                    onClick={ handleLogin }
+                  >
+                    Entrar
+                  </button>
+                </form>)}
+          </div>
+        )
     );
   }
 }
