@@ -1,8 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Redirect, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Album from './pages/Album';
 import Favorites from './pages/Favorites';
-import Loading from './pages/Loading';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
@@ -14,7 +13,7 @@ class App extends React.Component {
   state = {
     loginName: '',
     disableButton: true,
-    loading: false,
+    loadingLogin: false,
     savedLoginName: false,
   };
 
@@ -34,32 +33,34 @@ class App extends React.Component {
 
   handleLogin = async () => {
     const { loginName } = this.state;
-    this.setState({ loading: true });
+    this.setState({ loadingLogin: true });
     await createUser({ name: loginName });
-    this.setState({ savedLoginName: true, });
+    this.setState({ savedLoginName: true });
   };
 
   render() {
-    const { loginName, disableButton, loading, savedLoginName } = this.state;
+    const { loginName, disableButton, loadingLogin, savedLoginName } = this.state;
     return (
       <BrowserRouter>
-        <Route path="/album/:id" component={ Album } />
-        <Route path="/profile/edit" component={ ProfileEdit } />
-        <Route path="/favorites" component={ Favorites } />
-        <Route path="/profile" component={ Profile } />
-        <Route path="/search" component={ Search } />
-        <Route
-          path="/"
-          render={ () => (<Login
-            name={ loginName }
-            disableButton={ disableButton }
-            handleLogin={ this.handleLogin }
-            onInputChange={ this.handleChange }
-            loading={ loading }
-            savedLoginName={ savedLoginName }
-          />) }
-        />
-        <Route path="*" component={ NotFound } />
+        <Switch>
+          <Route path="/album/:id" component={ Album } />
+          <Route path="/profile/edit" component={ ProfileEdit } />
+          <Route path="/favorites" component={ Favorites } />
+          <Route path="/profile" component={ Profile } />
+          <Route path="/search" component={ Search } />
+          <Route
+            path="/"
+            render={ () => (<Login
+              name={ loginName }
+              disableButton={ disableButton }
+              handleLogin={ this.handleLogin }
+              onInputChange={ this.handleChange }
+              loadingLogin={ loadingLogin }
+              savedLoginName={ savedLoginName }
+            />) }
+          />
+          <Route path="*" component={ NotFound } />
+        </Switch>
       </BrowserRouter>
     );
   }

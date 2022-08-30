@@ -6,12 +6,12 @@ import Loading from './Loading';
 class Login extends React.Component {
   render() {
     const { loginName, disableButton, handleLogin,
-      onInputChange, loading, savedLoginName } = this.props;
+      onInputChange, loadingLogin, savedLoginName } = this.props;
     return (
       savedLoginName ? <Redirect to="/search" />
         : (
           <div data-testid="page-login">
-            {loading ? <Loading />
+            {loadingLogin ? <Loading />
               : (
                 <form>
                   <input
