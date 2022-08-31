@@ -42,24 +42,26 @@ class Search extends React.Component {
         <Header />
         {loadingSearch ? <Loading />
           : (
+            <form>
+              <input
+                name="searchText"
+                type="text"
+                data-testid="search-artist-input"
+                onChange={ this.handleChange }
+                value={ searchText }
+              />
+              <button
+                type="button"
+                data-testid="search-artist-button"
+                disabled={ disableButton }
+                onClick={ this.handleSearch }
+              >
+                Pesquisar
+              </button>
+            </form>)}
+        { (searchResult.length === 0) ? (<p>Nenhum álbum foi encontrado</p>)
+          : (
             <div>
-              <form>
-                <input
-                  name="searchText"
-                  type="text"
-                  data-testid="search-artist-input"
-                  onChange={ this.handleChange }
-                  value={ searchText }
-                />
-                <button
-                  type="button"
-                  data-testid="search-artist-button"
-                  disabled={ disableButton }
-                  onClick={ this.handleSearch }
-                >
-                  Pesquisar
-                </button>
-              </form>
               <p>
                 Resultado de álbuns de:
                 {' '}
@@ -79,7 +81,7 @@ class Search extends React.Component {
                   </div>
                 );
               })}
-            </div>)}
+            </div>) }
       </div>
     );
   }
