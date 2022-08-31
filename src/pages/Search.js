@@ -1,10 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import Loading from './Loading';
+import searchAlbumsAPI from '../services/searchAlbumsAPI';
 
 class Search extends React.Component {
   state = {
     searchText: '',
+    artist: '',
     disableButton: true,
+    loadingSearch: false,
+    searchResult: [],
   };
 
   handleChange = ({ target }) => {
@@ -13,6 +19,7 @@ class Search extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({
       [name]: value,
+      artist: value,
     });
     if (value.length >= inputMinLimit) {
       this.setState({
@@ -21,28 +28,58 @@ class Search extends React.Component {
     }
   };
 
+  handleSearch = async () => {
+    const { searchText } = this.state;
+    this.setState({ loadingSearch: true });
+    const responseSearch = await searchAlbumsAPI(searchText);
+    this.setState({ searchText: '', loadingSearch: false, searchResult: responseSearch });
+  };
+
   render() {
-    const { searchText, disableButton } = this.state;
+    const { searchText, artist, disableButton, loadingSearch, searchResult } = this.state;
     return (
       <div data-testid="page-search">
         <Header />
-        <form>
-          <input
-            name="searchText"
-            type="text"
-            data-testid="search-artist-input"
-            onChange={ this.handleChange }
-            value={ searchText }
-          />
-          <button
-            type="button"
-            data-testid="search-artist-button"
-            disabled={ disableButton }
-            onClick={ this.handleLogin }
-          >
-            Pesquisar
-          </button>
-        </form>
+        {loadingSearch ? <Loading />
+          : (
+            <div>
+              <form>
+                <input
+                  name="searchText"
+                  type="text"
+                  data-testid="search-artist-input"
+                  onChange={ this.handleChange }
+                  value={ searchText }
+                />
+                <button
+                  type="button"
+                  data-testid="search-artist-button"
+                  disabled={ disableButton }
+                  onClick={ this.handleSearch }
+                >
+                  Pesquisar
+                </button>
+              </form>
+              <p>
+                Resultado de álbuns de:
+                {' '}
+                {artist}
+              </p>
+              {searchResult.map((album) => {
+                const { collectionId, collectionName, artworkUrl100 } = album;
+                return (
+                  <div key={ collectionId }>
+                    <img src={ artworkUrl100 } alt={ collectionName } />
+                    <Link
+                      to={ `/album/${collectionId}` }
+                      data-testid={ `link-to-album-${collectionId}` }
+                    >
+                      {collectionName}
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>)}
       </div>
     );
   }
