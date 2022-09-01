@@ -1,23 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from '../pages/Loading';
 
 class MusicCard extends React.Component {
   state = {
-    loadingAddSong: false,
+    loading: false,
+    favoriteList: [],
   };
 
+  async componentDidMount() {
+    const favoriteList = await getFavoriteSongs();
+    this.setState({ favoriteList });
+  }
+
   handleAddSong = async () => {
-    const { album } = this.props;
-    this.setState({ loadingAddSong: true });
-    await addSong(album);
-    this.setState({ loadingAddSong: false });
+    // const { song: { trackName, previewUrl, trackId } } = this.props;
+    const { song } = this.props;
+    this.setState({ loading: true });
+    await addSong(song);
+    const updateFavoriteList = await getFavoriteSongs();
+    this.setState({ loading: false, favoriteList: updateFavoriteList });
   };
 
   render() {
-    const { loadingAddSong } = this.state;
-    const { album: { trackName, previewUrl, trackId }, checked } = this.props;
+    const { loading, favoriteList } = this.state;
+    const { song: { trackName, previewUrl, trackId } } = this.props;
     return (
       <div>
         <div>
@@ -29,17 +37,17 @@ class MusicCard extends React.Component {
             <code>audio</code>
             .
           </audio>
-          <label htmlFor="favorite">
+          <label htmlFor={ `checkbox-music-${trackId}` }>
             Favorita
             <input
               type="checkbox"
               name={ trackName }
               data-testid={ `checkbox-music-${trackId}` }
-              id={ trackId }
+              id={ `checkbox-music-${trackId}` }
+              checked={ favoriteList.some((song) => song.trackName === trackName) }
               onChange={ this.handleAddSong }
-              checked={ checked }
             />
-            <span>{loadingAddSong && <Loading />}</span>
+            <span>{loading && <Loading />}</span>
           </label>
         </div>
       </div>
