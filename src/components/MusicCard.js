@@ -17,8 +17,7 @@ class MusicCard extends React.Component {
 
   render() {
     const { loadingAddSong } = this.state;
-    // const { album } = this.props;
-    const { trackName, previewUrl, trackId } = this.props;
+    const { album: { trackName, previewUrl, trackId }, checked } = this.props;
     return (
       <div>
         <div>
@@ -38,6 +37,7 @@ class MusicCard extends React.Component {
               data-testid={ `checkbox-music-${trackId}` }
               id={ trackId }
               onChange={ this.handleAddSong }
+              checked={ checked }
             />
             <span>{loadingAddSong && <Loading />}</span>
           </label>

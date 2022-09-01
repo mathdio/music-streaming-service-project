@@ -3,17 +3,24 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
+import Loading from './Loading';
 
 class Album extends React.Component {
   state = {
     trackList: [],
     artistName: '',
     collectionName: '',
+    loadingFavorites: false,
+    favoriteList: [],
   };
 
   async componentDidMount() {
     const { match: { params: { id } } } = this.props;
     this.gettingMusics(id);
+    this.setState({ loadingFavorites: true });
+    const favoriteList = await getFavoriteSongs();
+    this.setState({ loadingFavorites: false, favoriteList });
   }
 
   gettingMusics = async (id) => {
@@ -27,7 +34,8 @@ class Album extends React.Component {
   };
 
   render() {
-    const { trackList, artistName, collectionName } = this.state;
+    const { trackList, artistName, collectionName,
+      loadingFavorites, favoriteList } = this.state;
 
     return (
       <div data-testid="page-album">
@@ -39,11 +47,10 @@ class Album extends React.Component {
             <MusicCard
               key={ album.trackName }
               album={ album }
-              trackName={ album.trackName }
-              previewUrl={ album.previewUrl }
-              trackId={ album.trackId }
+              checked={ favoriteList.some((song) => song.trackName === album.trackName) }
             />))}
         </div>
+        <span>{loadingFavorites && <Loading />}</span>
       </div>
     );
   }
