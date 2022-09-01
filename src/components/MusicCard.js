@@ -8,7 +8,8 @@ class MusicCard extends React.Component {
     loadingAddSong: false,
   };
 
-  handleAddSong = async (album) => {
+  handleAddSong = async () => {
+    const { album } = this.props;
     this.setState({ loadingAddSong: true });
     await addSong(album);
     this.setState({ loadingAddSong: false });
@@ -16,32 +17,31 @@ class MusicCard extends React.Component {
 
   render() {
     const { loadingAddSong } = this.state;
-    const { album } = this.props;
-    const { trackName, previewUrl, trackId } = album;
+    // const { album } = this.props;
+    const { trackName, previewUrl, trackId } = this.props;
     return (
       <div>
-        {loadingAddSong ? <Loading />
-          : (
-            <div>
-              <h4>{trackName}</h4>
-              <audio data-testid="audio-component" src={ previewUrl } controls>
-                <track kind="captions" />
-                O seu navegador não suporta o elemento
-                {' '}
-                <code>audio</code>
-                .
-              </audio>
-              <label htmlFor="favorite">
-                Favorita
-                <input
-                  type="checkbox"
-                  name={ trackName }
-                  data-testid={ `checkbox-music-${trackId}` }
-                  id="favorite"
-                  onChange={ () => this.handleAddSong(album) }
-                />
-              </label>
-            </div>) }
+        <div>
+          <h4>{trackName}</h4>
+          <audio data-testid="audio-component" src={ previewUrl } controls>
+            <track kind="captions" />
+            O seu navegador não suporta o elemento
+            {' '}
+            <code>audio</code>
+            .
+          </audio>
+          <label htmlFor="favorite">
+            Favorita
+            <input
+              type="checkbox"
+              name={ trackName }
+              data-testid={ `checkbox-music-${trackId}` }
+              id={ trackId }
+              onChange={ this.handleAddSong }
+            />
+            <span>{loadingAddSong && <Loading />}</span>
+          </label>
+        </div>
       </div>
     );
   }
