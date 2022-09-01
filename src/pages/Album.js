@@ -31,15 +31,17 @@ class Album extends React.Component {
 
     return (
       <div data-testid="page-album">
-        <Header />
-        <h2 data-testid="artist-name">{artistName}</h2>
-        <h3 data-testid="album-name">{collectionName}</h3>
-        {trackList.map(({ trackName, previewUrl }) => (
-          <MusicCard
-            key={ trackName }
-            trackName={ trackName }
-            previewUrl={ previewUrl }
-          />))}
+        <div>
+          <Header />
+          <h2 data-testid="artist-name">{artistName}</h2>
+          <h3 data-testid="album-name">{collectionName}</h3>
+          {trackList.map((album) => (
+            <MusicCard
+              key={ album.trackName }
+              album={ album }
+              handleAddSong={ this.handleAddSong }
+            />))}
+        </div>
       </div>
     );
   }
