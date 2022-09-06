@@ -1,4 +1,5 @@
 import React from 'react';
+import uuid from 'react-uuid';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
@@ -29,7 +30,7 @@ class Favorites extends React.Component {
         {loading && <Loading />}
         {favoriteList.length > 0 && favoriteList.map((song) => (
           <MusicCard
-            key={ song.trackName }
+            key={ uuid() }
             song={ song }
             handleFavoriteChange={ this.handleFavoriteChange }
           />

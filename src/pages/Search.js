@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import uuid from 'react-uuid';
 import Header from '../components/Header';
 import Loading from './Loading';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
@@ -70,7 +71,7 @@ class Search extends React.Component {
               {searchResult.map((album) => {
                 const { collectionId, collectionName, artworkUrl100 } = album;
                 return (
-                  <div key={ collectionId }>
+                  <div key={ uuid() }>
                     <img src={ artworkUrl100 } alt={ collectionName } />
                     <Link
                       to={ `/album/${collectionId}` }

@@ -1,4 +1,5 @@
 import React from 'react';
+import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
@@ -37,7 +38,7 @@ class Album extends React.Component {
           <h3 data-testid="album-name">{collectionName}</h3>
           {trackList.map((song) => (
             <MusicCard
-              key={ song.trackName }
+              key={ uuid() }
               song={ song }
               // trackName={ song.trackName }
               // previewUrl={ song.previewUrl }

@@ -8,7 +8,7 @@ class ProfileEdit extends React.Component {
   state = {
     loading: true,
     disabledButton: false,
-    loginName: '',
+    name: '',
     email: '',
     image: '',
     description: '',
@@ -20,16 +20,16 @@ class ProfileEdit extends React.Component {
     const { name, email, image, description } = user;
     this.setState({
       loading: false,
-      loginName: name,
+      name,
       email,
       image,
       description,
-    });
+    }, () => this.checkForm);
   }
 
   checkForm = () => {
-    const { loginName, email, image, description } = this.state;
-    if (loginName === '' || email === '' || image === '' || description === '') {
+    const { name, email, image, description } = this.state;
+    if (name === '' || email === '' || image === '' || description === '') {
       this.setState({ disabledButton: true });
     } else {
       this.setState({ disabledButton: false });
@@ -44,65 +44,66 @@ class ProfileEdit extends React.Component {
   };
 
   clickUpdate = async (user) => {
-    await updateUser(user);
     this.setState({ profileUpdated: true });
+    await updateUser(user);
   };
 
   render() {
-    const { loading, loginName, email,
+    const { loading, name, email,
       image, description, disabledButton, profileUpdated } = this.state;
-    return (
-      <div data-testid="page-profile-edit">
-        <Header />
-        {loading ? <Loading />
-          : (
-            <form>
-              <input
-                name="loginName"
-                type="text"
-                data-testid="edit-input-name"
-                onChange={ this.handleChange }
-                value={ loginName }
-              />
-              <input
-                name="email"
-                type="email"
-                data-testid="edit-input-email"
-                onChange={ this.handleChange }
-                value={ email }
-              />
-              <input
-                name="image"
-                type="text"
-                data-testid="edit-input-image"
-                onChange={ this.handleChange }
-                value={ image }
-              />
-              <input
-                name="description"
-                type="text"
-                data-testid="edit-input-description"
-                onChange={ this.handleChange }
-                value={ description }
-              />
-              <button
-                type="button"
-                data-testid="edit-button-save"
-                disabled={ disabledButton }
-                onClick={ () => {
-                  this.clickUpdate({
-                    name: loginName,
-                    email,
-                    image,
-                    description,
-                  });
-                } }
-              >
-                Editar perfil
-              </button>
-            </form>) }
-        {profileUpdated && <Redirect push to="/profile" />}
-      </div>
+    // if (profileUpdated) return <Redirect to="/profile" />;
+    return (profileUpdated ? <Redirect to="/profile" />
+      : (
+        <div data-testid="page-profile-edit">
+          <Header />
+          {loading ? <Loading />
+            : (
+              <form>
+                <input
+                  name="name"
+                  type="text"
+                  data-testid="edit-input-name"
+                  onChange={ this.handleChange }
+                  value={ name }
+                />
+                <input
+                  name="email"
+                  type="email"
+                  data-testid="edit-input-email"
+                  onChange={ this.handleChange }
+                  value={ email }
+                />
+                <input
+                  name="image"
+                  type="text"
+                  data-testid="edit-input-image"
+                  onChange={ this.handleChange }
+                  value={ image }
+                />
+                <input
+                  name="description"
+                  type="text"
+                  data-testid="edit-input-description"
+                  onChange={ this.handleChange }
+                  value={ description }
+                />
+                <button
+                  type="button"
+                  data-testid="edit-button-save"
+                  disabled={ disabledButton }
+                  onClick={ () => {
+                    this.clickUpdate({
+                      name,
+                      email,
+                      image,
+                      description,
+                    });
+                  } }
+                >
+                  Editar perfil
+                </button>
+              </form>) }
+        </div>)
     );
   }
 }
