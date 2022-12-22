@@ -38,6 +38,11 @@
   outline: none;
 }
 
+.Login-warning-container {
+  color: red;
+  font-size: 12px;
+}
+
 .Login-button {
   background-color: var(--purple-color);
   border: 0;

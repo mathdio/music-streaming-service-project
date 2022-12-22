@@ -7,8 +7,19 @@ import './Login.css';
 class Login extends React.Component {
   state = {
     loginName: '',
+    invalidName: false,
     disableButton: true,
     loadingLogin: false,
+  };
+
+  checkInvalidName = () => {
+    const { loginName } = this.state;
+    const inputMinLimit = 3;
+    if (loginName.length > 0 && loginName.length < inputMinLimit) {
+      this.setState({ invalidName: true });
+    } else {
+      this.setState({ invalidName: false });
+    }
   };
 
   handleChange = ({ target }) => {
@@ -17,6 +28,8 @@ class Login extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({
       [name]: value,
+    }, () => {
+      this.checkInvalidName();
     });
     if (value.length >= inputMinLimit) {
       this.setState({ disableButton: false });
@@ -34,7 +47,7 @@ class Login extends React.Component {
   };
 
   render() {
-    const { loginName, disableButton, loadingLogin } = this.state;
+    const { loginName, disableButton, loadingLogin, invalidName } = this.state;
     return (
       <main data-testid="page-login" className="Login-main-container">
         {loadingLogin ? <Loading />
@@ -49,6 +62,11 @@ class Login extends React.Component {
                 placeholder="What's your name?"
                 className="Login-input"
               />
+              {invalidName && (
+                <div className="Login-warning-container">
+                  <p>The chosen name must have at least 3 characters.</p>
+                </div>
+              )}
               <button
                 type="button"
                 data-testid="login-submit-button"
