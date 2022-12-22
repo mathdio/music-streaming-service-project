@@ -41,6 +41,8 @@
 .Login-warning-container {
   color: red;
   font-size: 12px;
+  margin-top: 3px;
+  margin-bottom: 10px;
 }
 
 .Login-button {
@@ -50,6 +52,10 @@
   color: white;
   font-weight: 700;
   height: 2.5rem;
-  margin-top: 15px;
+  margin-top: 25px;
   width: 60%;
+}
+
+.Login-btn-with-warning {
+  margin-top: -1px;
 }

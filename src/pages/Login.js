@@ -10,15 +10,22 @@ class Login extends React.Component {
     invalidName: false,
     disableButton: true,
     loadingLogin: false,
+    buttonClasses: 'Login-button',
   };
 
   checkInvalidName = () => {
     const { loginName } = this.state;
     const inputMinLimit = 3;
     if (loginName.length > 0 && loginName.length < inputMinLimit) {
-      this.setState({ invalidName: true });
+      this.setState({
+        invalidName: true,
+        buttonClasses: 'Login-button Login-btn-with-warning',
+      });
     } else {
-      this.setState({ invalidName: false });
+      this.setState({
+        invalidName: false,
+        buttonClasses: 'Login-button',
+      });
     }
   };
 
@@ -47,7 +54,8 @@ class Login extends React.Component {
   };
 
   render() {
-    const { loginName, disableButton, loadingLogin, invalidName } = this.state;
+    const { loginName, disableButton, loadingLogin,
+      invalidName, buttonClasses } = this.state;
     return (
       <main data-testid="page-login" className="Login-main-container">
         {loadingLogin ? <Loading />
@@ -72,7 +80,7 @@ class Login extends React.Component {
                 data-testid="login-submit-button"
                 disabled={ disableButton }
                 onClick={ this.handleLogin }
-                className="Login-button"
+                className={ buttonClasses }
               >
                 ENTER
               </button>
