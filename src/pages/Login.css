@@ -40,6 +40,7 @@
 
 .Login-button {
   background-color: var(--purple-color);
+  border: 0;
   border-radius: 100px;
   color: white;
   font-weight: 700;

@@ -20,9 +20,9 @@ class Login extends React.Component {
       [name]: value,
     });
     if (value.length >= inputMinLimit) {
-      this.setState({
-        disableButton: false,
-      });
+      this.setState({ disableButton: false });
+    } else {
+      this.setState({ disableButton: true });
     }
   };
 
