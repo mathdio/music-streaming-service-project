@@ -1,0 +1,80 @@
+:root {
+  --blue-color: #00D5E2;
+  --purple-color: #003BE5;
+}
+
+.Login-main-container {
+  align-items: center;
+  background-image: url('../images/login-background.png'), linear-gradient(135deg,#003BE5 20%, #006de3 30%, #00D5E2 80%);
+  background-size: 100vw 100vh;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.Login-form-container {
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  justify-content: center;
+  width: 50vw;
+}
+
+.Login-title-container {
+  color: var(--blue-color);
+  display: flex;
+  font-size: 30px;
+  font-weight: 100;
+  justify-content: center;
+  margin-bottom: 30px;
+  text-align: center;
+  width: 60%;
+  vertical-align: baseline;
+}
+
+.Login-title-icon {
+  height: 30px;
+  margin-right: 5px;
+  width: 30px;
+}
+
+.Login-input {
+  border: var(--purple-color) solid 1px;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  height: 2.5rem;
+  text-align: center;
+  width: 60%;
+  transition: 0.5s;
+}
+
+.Login-input:focus {
+  border: 1px solid orange;
+  outline: none;
+}
+
+.Login-warning-container {
+  color: red;
+  font-size: 12px;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+.Login-button {
+  background-color: var(--purple-color);
+  border: 0;
+  border-radius: 100px;
+  color: white;
+  font-weight: 700;
+  height: 2.5rem;
+  margin-top: 25px;
+  width: 60%;
+}
+
+.Login-btn-with-warning {
+  margin-top: -1px;
+}
