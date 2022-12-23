@@ -1,4 +1,5 @@
 :root {
+  --blue-color: #00D5E2;
   --purple-color: #003BE5;
 }
 
@@ -21,6 +22,24 @@
   height: 60vh;
   justify-content: center;
   width: 50vw;
+}
+
+.Login-title-container {
+  color: var(--blue-color);
+  display: flex;
+  font-size: 30px;
+  font-weight: 100;
+  justify-content: center;
+  margin-bottom: 30px;
+  text-align: center;
+  width: 60%;
+  vertical-align: baseline;
+}
+
+.Login-title-icon {
+  height: 30px;
+  margin-right: 5px;
+  width: 30px;
 }
 
 .Login-input {

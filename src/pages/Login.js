@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Loading from './Loading';
 import { createUser } from '../services/userAPI';
 import './Login.css';
+import titleIcon from '../images/titleIcon.svg';
 
 class Login extends React.Component {
   state = {
@@ -61,6 +62,14 @@ class Login extends React.Component {
         {loadingLogin ? <Loading />
           : (
             <form className="Login-form-container">
+              <p className="Login-title-container">
+                <img
+                  alt=""
+                  src={ titleIcon }
+                  className="Login-title-icon"
+                />
+                Music Streaming Service
+              </p>
               <input
                 name="loginName"
                 type="text"
