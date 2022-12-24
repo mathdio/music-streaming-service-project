@@ -4,6 +4,7 @@ import uuid from 'react-uuid';
 import Header from '../components/Header';
 import Loading from './Loading';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import './Search.css';
 
 class Search extends React.Component {
   state = {
@@ -39,7 +40,7 @@ class Search extends React.Component {
   render() {
     const { searchText, artist, disableButton, loadingSearch, searchResult } = this.state;
     return (
-      <div data-testid="page-search">
+      <div data-testid="page-search" className="Search-body-container">
         <Header />
         {loadingSearch ? <Loading />
           : (
