@@ -1,3 +1,13 @@
 .Search-body-container {
   display: flex;
 }
+
+.Search-main-container {
+  border: red solid 1px;
+  width: 80vw;
+}
+
+.Search-form-container {
+  height: 33vh;
+  width: 100%;
+}

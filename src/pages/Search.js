@@ -44,46 +44,49 @@ class Search extends React.Component {
         <Header />
         {loadingSearch ? <Loading />
           : (
-            <form>
-              <input
-                name="searchText"
-                type="text"
-                data-testid="search-artist-input"
-                onChange={ this.handleChange }
-                value={ searchText }
-              />
-              <button
-                type="button"
-                data-testid="search-artist-button"
-                disabled={ disableButton }
-                onClick={ this.handleSearch }
-              >
-                Pesquisar
-              </button>
-            </form>)}
-        { (searchResult.length === 0) ? (<p>Nenhum álbum foi encontrado</p>)
-          : (
-            <div>
-              <p>
-                Resultado de álbuns de:
-                {' '}
-                {artist}
-              </p>
-              {searchResult.map((album) => {
-                const { collectionId, collectionName, artworkUrl100 } = album;
-                return (
-                  <div key={ uuid() }>
-                    <img src={ artworkUrl100 } alt={ collectionName } />
-                    <Link
-                      to={ `/album/${collectionId}` }
-                      data-testid={ `link-to-album-${collectionId}` }
-                    >
-                      {collectionName}
-                    </Link>
-                  </div>
-                );
-              })}
-            </div>) }
+            <main className="Search-main-container">
+              <form className="Search-form-container">
+                <input
+                  name="searchText"
+                  type="text"
+                  data-testid="search-artist-input"
+                  onChange={ this.handleChange }
+                  value={ searchText }
+                />
+                <button
+                  type="button"
+                  data-testid="search-artist-button"
+                  disabled={ disableButton }
+                  onClick={ this.handleSearch }
+                >
+                  Pesquisar
+                </button>
+              </form>
+              { (searchResult.length === 0) ? (<p>Nenhum álbum foi encontrado</p>)
+                : (
+                  <div>
+                    <p>
+                      Resultado de álbuns de:
+                      {' '}
+                      {artist}
+                    </p>
+                    {searchResult.map((album) => {
+                      const { collectionId, collectionName, artworkUrl100 } = album;
+                      return (
+                        <div key={ uuid() }>
+                          <img src={ artworkUrl100 } alt={ collectionName } />
+                          <Link
+                            to={ `/album/${collectionId}` }
+                            data-testid={ `link-to-album-${collectionId}` }
+                          >
+                            {collectionName}
+                          </Link>
+                        </div>
+                      );
+                    })}
+                  </div>) }
+            </main>
+          )}
       </div>
     );
   }

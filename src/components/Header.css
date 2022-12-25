@@ -6,7 +6,6 @@
 }
 
 .Header-container {
-  border: red solid 1px;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -17,8 +16,6 @@
 }
 
 .Header-title-container {
-  border: red solid 1px;
-
   color: var(--Header-blue-color);
   display: flex;
   font-size: 1rem;
@@ -37,7 +34,6 @@
 }
 
 .Header-links-container {
-  border: red solid 1px;
   display: flex;
   flex-direction: column;
   gap: 15px;
