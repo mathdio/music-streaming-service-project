@@ -5,6 +5,13 @@
   --Search-purple-color: #003BE5;
 }
 
+
+::placeholder {
+  color: white;
+  font-weight: 700;
+  opacity: 1;
+}
+
 .Search-body-container {
   display: flex;
 }
@@ -26,11 +33,10 @@
 }
 
 .Search-input {
+  background-color: rgba(255, 255, 255, .5);
   border: 0;
   border-radius: 23px;
-  color: white;
   height: 2.5rem;
-  opacity: 50%;
   padding-left: 15px;
   width: 40%;
 }
