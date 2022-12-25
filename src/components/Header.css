@@ -1,0 +1,59 @@
+:root {
+  --Header-blue-color: #00D5E2;
+  --Header-darker-gray: #444955;
+  --Header-lighter-gray: #C0C3C9;
+  --Header-purple-color: #003BE5;
+}
+
+.Header-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  height: 100vh;
+  justify-content: space-around;
+  width: 20vw;
+}
+
+.Header-title-container {
+  color: var(--Header-blue-color);
+  display: flex;
+  font-size: 1rem;
+  justify-content: center;
+  width: 50%;
+}
+
+.Header-title-icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+.Header-container a {
+  height: 1rem;
+  text-decoration: none;
+}
+
+.Header-links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.Header-link {
+  display: flex;
+}
+
+.Header-link-text {
+  color: var(--Header-darker-gray);
+  margin-top: 2px;
+}
+
+.Header-icons {
+  height: 1rem;
+  margin-right: 5px;
+  width: 1rem;
+}
+
+.Header-profile-name {
+  color: var(--Header-darker-gray);
+}
