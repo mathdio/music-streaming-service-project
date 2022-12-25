@@ -50,16 +50,19 @@ class Search extends React.Component {
                   name="searchText"
                   type="text"
                   data-testid="search-artist-input"
+                  placeholder="WRITE YOUR SEARCH"
                   onChange={ this.handleChange }
                   value={ searchText }
+                  className="Search-input"
                 />
                 <button
                   type="button"
                   data-testid="search-artist-button"
                   disabled={ disableButton }
                   onClick={ this.handleSearch }
+                  className="Search-button"
                 >
-                  Pesquisar
+                  SEARCH
                 </button>
               </form>
               { (searchResult.length === 0) ? (<p>Nenhum álbum foi encontrado</p>)
