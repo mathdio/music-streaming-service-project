@@ -1,0 +1,8 @@
+:root {
+  --Loading-lighter-gray: #C0C3C9;
+}
+  
+.Loading-container {
+  color: var(--Loading-lighter-gray);
+  font-size: 50px;
+}

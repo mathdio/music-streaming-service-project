@@ -49,7 +49,33 @@ class Search extends React.Component {
     return (
       <div data-testid="page-search" className="Search-body-container">
         <Header />
-        {loadingSearch ? <Loading />
+        {loadingSearch
+          ? (
+            <main className="Search-main-container">
+              <form className="Search-form-container">
+                <input
+                  name="searchText"
+                  type="text"
+                  data-testid="search-artist-input"
+                  placeholder="WRITE YOUR SEARCH"
+                  onChange={ this.handleChange }
+                  value={ searchText }
+                  className="Search-input"
+                />
+                <button
+                  type="button"
+                  data-testid="search-artist-button"
+                  disabled={ disableButton }
+                  onClick={ this.handleSearch }
+                  className="Search-button"
+                >
+                  SEARCH
+                </button>
+              </form>
+              <div className="Search-loading-container">
+                <Loading />
+              </div>
+            </main>)
           : (
             <main className="Search-main-container">
               <form className="Search-form-container">

@@ -35,6 +35,10 @@
   width: 40%;
 }
 
+.Search-input:focus {
+  outline: none;
+}
+
 .Search-input::-webkit-input-placeholder {
   color: white;
   font-weight: 700;
@@ -50,4 +54,13 @@
   height: 2.5rem;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.Search-loading-container {
+  align-items: center;
+  background-color: var(--Search-grey-white);
+  display: flex;
+  height: 67vh;
+  justify-content: center;
+  width: 80vw;
 }
