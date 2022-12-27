@@ -9,11 +9,11 @@ import './Search.css';
 class Search extends React.Component {
   state = {
     searchText: '',
-    artist: '',
     disableButton: true,
     loadingSearch: false,
     searchResult: [],
     firstSearch: false,
+    resultsTitle: '',
   };
 
   handleChange = ({ target }) => {
@@ -22,7 +22,6 @@ class Search extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({
       [name]: value,
-      artist: value,
     });
     if (value.length >= inputMinLimit) {
       this.setState({ disableButton: false });
@@ -40,12 +39,13 @@ class Search extends React.Component {
       loadingSearch: false,
       searchResult: responseSearch,
       firstSearch: true,
+      resultsTitle: `Showing albuns of: ${searchText}`,
     });
   };
 
   render() {
-    const { searchText, artist, disableButton,
-      loadingSearch, searchResult, firstSearch } = this.state;
+    const { searchText, disableButton,
+      loadingSearch, searchResult, firstSearch, resultsTitle } = this.state;
     return (
       <div data-testid="page-search" className="Search-body-container">
         <Header />
@@ -103,9 +103,7 @@ class Search extends React.Component {
               {(searchResult.length > 0 && firstSearch) && (
                 <div className="Search-results-container">
                   <p className="Search-title-results">
-                    Resultado de álbuns de:
-                    {' '}
-                    {artist}
+                    {resultsTitle}
                   </p>
                   <div className="Search-albuns-container">
                     {searchResult.map((album) => {
