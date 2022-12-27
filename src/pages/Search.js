@@ -25,9 +25,9 @@ class Search extends React.Component {
       artist: value,
     });
     if (value.length >= inputMinLimit) {
-      this.setState({
-        disableButton: false,
-      });
+      this.setState({ disableButton: false });
+    } else {
+      this.setState({ disableButton: true });
     }
   };
 
@@ -99,28 +99,39 @@ class Search extends React.Component {
                 </button>
               </form>
               {(searchResult.length === 0 && firstSearch)
-                && (<p>Nenhum álbum foi encontrado</p>)}
+                && (<p className="Search-no-results">Nenhum álbum foi encontrado</p>)}
               {(searchResult.length > 0 && firstSearch) && (
-                <div>
-                  <p>
+                <div className="Search-results-container">
+                  <p className="Search-title-results">
                     Resultado de álbuns de:
                     {' '}
                     {artist}
                   </p>
-                  {searchResult.map((album) => {
-                    const { collectionId, collectionName, artworkUrl100 } = album;
-                    return (
-                      <div key={ uuid() }>
-                        <img src={ artworkUrl100 } alt={ collectionName } />
-                        <Link
-                          to={ `/album/${collectionId}` }
-                          data-testid={ `link-to-album-${collectionId}` }
-                        >
-                          {collectionName}
-                        </Link>
-                      </div>
-                    );
-                  })}
+                  <div className="Search-albuns-container">
+                    {searchResult.map((album) => {
+                      const { collectionId, collectionName,
+                        artworkUrl100, artistName } = album;
+                      return (
+                        <div key={ uuid() } className="Search-album-card">
+                          <img
+                            src={ artworkUrl100 }
+                            alt={ collectionName }
+                            className="Search-album-img"
+                          />
+                          <Link
+                            to={ `/album/${collectionId}` }
+                            data-testid={ `link-to-album-${collectionId}` }
+                            className="Search-album-link"
+                          >
+                            {collectionName}
+                            <p className="Search-artist-name">
+                              {artistName}
+                            </p>
+                          </Link>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>) }
             </main>
           )}
