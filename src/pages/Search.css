@@ -1,6 +1,7 @@
 :root {
   --Search-blue-color: #00D5E2;
   --Search-darker-gray: #444955;
+  --Search-grey-white : #EFF3F9;
   --Search-lighter-gray: #C0C3C9;
   --Search-purple-color: #003BE5;
 }
@@ -10,14 +11,14 @@
 }
 
 .Search-main-container {
-  border: red solid 1px;
+  background-color: var(--Search-grey-white);
   width: 80vw;
 }
 
 .Search-form-container {
-  border: blue solid 1px;
   align-items: center;
   background-image: url('../images/login-background.png'), linear-gradient(135deg,#003BE5 20%, #006de3 30%, #00D5E2 80%);
+  background-size: 80vw 100vh;
   display: flex;
   gap: 15px;
   height: 33vh;

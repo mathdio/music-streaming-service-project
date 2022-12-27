@@ -13,6 +13,7 @@ class Search extends React.Component {
     disableButton: true,
     loadingSearch: false,
     searchResult: [],
+    firstSearch: false,
   };
 
   handleChange = ({ target }) => {
@@ -34,11 +35,17 @@ class Search extends React.Component {
     const { searchText } = this.state;
     this.setState({ loadingSearch: true });
     const responseSearch = await searchAlbumsAPI(searchText);
-    this.setState({ searchText: '', loadingSearch: false, searchResult: responseSearch });
+    this.setState({
+      searchText: '',
+      loadingSearch: false,
+      searchResult: responseSearch,
+      firstSearch: true,
+    });
   };
 
   render() {
-    const { searchText, artist, disableButton, loadingSearch, searchResult } = this.state;
+    const { searchText, artist, disableButton,
+      loadingSearch, searchResult, firstSearch } = this.state;
     return (
       <div data-testid="page-search" className="Search-body-container">
         <Header />
@@ -65,29 +72,30 @@ class Search extends React.Component {
                   SEARCH
                 </button>
               </form>
-              { (searchResult.length === 0) ? (<p>Nenhum álbum foi encontrado</p>)
-                : (
-                  <div>
-                    <p>
-                      Resultado de álbuns de:
-                      {' '}
-                      {artist}
-                    </p>
-                    {searchResult.map((album) => {
-                      const { collectionId, collectionName, artworkUrl100 } = album;
-                      return (
-                        <div key={ uuid() }>
-                          <img src={ artworkUrl100 } alt={ collectionName } />
-                          <Link
-                            to={ `/album/${collectionId}` }
-                            data-testid={ `link-to-album-${collectionId}` }
-                          >
-                            {collectionName}
-                          </Link>
-                        </div>
-                      );
-                    })}
-                  </div>) }
+              {(searchResult.length === 0 && firstSearch)
+                && (<p>Nenhum álbum foi encontrado</p>)}
+              {(searchResult.length > 0 && firstSearch) && (
+                <div>
+                  <p>
+                    Resultado de álbuns de:
+                    {' '}
+                    {artist}
+                  </p>
+                  {searchResult.map((album) => {
+                    const { collectionId, collectionName, artworkUrl100 } = album;
+                    return (
+                      <div key={ uuid() }>
+                        <img src={ artworkUrl100 } alt={ collectionName } />
+                        <Link
+                          to={ `/album/${collectionId}` }
+                          data-testid={ `link-to-album-${collectionId}` }
+                        >
+                          {collectionName}
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </div>) }
             </main>
           )}
       </div>

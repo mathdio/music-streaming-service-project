@@ -3,10 +3,12 @@
   --Header-darker-gray: #444955;
   --Header-lighter-gray: #C0C3C9;
   --Header-purple-color: #003BE5;
+  --Header-white-color: #F0F1F2;
 }
 
 .Header-container {
   align-items: center;
+  background-color: var(--Header-white-color);
   display: flex;
   flex-direction: column;
   font-size: 1rem;
