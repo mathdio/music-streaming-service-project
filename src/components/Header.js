@@ -29,7 +29,11 @@ class Header extends React.Component {
   render() {
     const { loadingHeader, loginName } = this.state;
     return (
-      loadingHeader ? <Loading />
+      loadingHeader
+        ? (
+          <header data-testid="header-component" className="Header-container">
+            <Loading />
+          </header>)
         : (
           <header data-testid="header-component" className="Header-container">
             <p className="Header-title-container">
