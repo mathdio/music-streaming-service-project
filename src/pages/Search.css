@@ -70,6 +70,7 @@
 .Search-no-results {
   color: var(--Search-lighter-gray);
   display: flex;
+  height: 67vh;
   justify-content: center;
   margin-top: 30vh;
   font-size: 1.875rem;

@@ -99,7 +99,7 @@ class Search extends React.Component {
                 </button>
               </form>
               {(searchResult.length === 0 && firstSearch)
-                && (<p className="Search-no-results">Nenhum álbum foi encontrado</p>)}
+                && (<p className="Search-no-results">No album found.</p>)}
               {(searchResult.length > 0 && firstSearch) && (
                 <div className="Search-results-container">
                   <p className="Search-title-results">

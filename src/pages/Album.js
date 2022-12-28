@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
+import './Album.css';
 
 class Album extends React.Component {
   state = {
     trackList: [],
     artistName: '',
     collectionName: '',
+    albumCover: '',
   };
 
   async componentDidMount() {
@@ -24,27 +26,34 @@ class Album extends React.Component {
       trackList,
       artistName: musicsResult[0].artistName,
       collectionName: musicsResult[0].collectionName,
+      albumCover: musicsResult[0].artworkUrl100,
     });
   };
 
   render() {
-    const { trackList, artistName, collectionName } = this.state;
+    const { trackList, artistName, collectionName, albumCover } = this.state;
 
     return (
       <div data-testid="page-album">
-        <div>
-          <Header />
-          <h2 data-testid="artist-name">{artistName}</h2>
-          <h3 data-testid="album-name">{collectionName}</h3>
+        <Header />
+        <main className="Album-main-container">
+          <div className="Album-infos">
+            <h2 data-testid="artist-name">{artistName}</h2>
+            <h3 data-testid="album-name">{collectionName}</h3>
+            <img
+              src={ albumCover }
+              alt={ collectionName }
+            />
+          </div>
           {trackList.map((song) => (
             <MusicCard
               key={ uuid() }
               song={ song }
-              // trackName={ song.trackName }
-              // previewUrl={ song.previewUrl }
-              // trackId={ song.trackId }
+            // trackName={ song.trackName }
+            // previewUrl={ song.previewUrl }
+            // trackId={ song.trackId }
             />))}
-        </div>
+        </main>
       </div>
     );
   }

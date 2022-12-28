@@ -1,0 +1,10 @@
+.Album-main-container {
+  border: solid red 1px;
+  margin-left: 20vw;
+}
+
+.Album-infos {
+  background-image: url('../images/login-background.png'), linear-gradient(135deg,#003BE5 20%, #006de3 30%, #00D5E2 80%);
+  background-size: 80vw 100vh;
+  height: 33vh;
+}
