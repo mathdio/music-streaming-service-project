@@ -1,13 +1,28 @@
-.MusicCard-tracks-container {
-  border: solid red 1px;
+.MusicCard-track-card {
   align-items: center;
   display: flex;
   height: 62px;
-  justify-content: space-between;
-  width: 40%;
+  justify-content: flex-end;
+  width: 99%;
+}
+
+.MusicCard-track-name {
+  font-size: 0.875rem;
+}
+
+.MusicCard-audio-controller {
+  margin-left: 2%;
+  min-width: 30vw;
+  max-width: 30vw;
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: white;
+  color: #000;
 }
 
 .MusicCard-favorite-input {
   height: 20px;
+  margin-left: 2%;
   width: 20px;
 }

@@ -38,21 +38,26 @@ class Album extends React.Component {
         <Header />
         <main className="Album-main-container">
           <div className="Album-infos">
-            <h2 data-testid="artist-name">{artistName}</h2>
-            <h3 data-testid="album-name">{collectionName}</h3>
+            <div className="Album-artist-album-names">
+              <h3 data-testid="album-name">{collectionName}</h3>
+              <p data-testid="artist-name">{artistName}</p>
+            </div>
             <img
               src={ albumCover }
               alt={ collectionName }
+              className="Album-cover-img"
             />
           </div>
-          {trackList.map((song) => (
-            <MusicCard
-              key={ uuid() }
-              song={ song }
-            // trackName={ song.trackName }
-            // previewUrl={ song.previewUrl }
-            // trackId={ song.trackId }
-            />))}
+          <div className="Album-tracks-container">
+            {trackList.map((song) => (
+              <MusicCard
+                key={ uuid() }
+                song={ song }
+                // trackName={ song.trackName }
+                // previewUrl={ song.previewUrl }
+                // trackId={ song.trackId }
+              />))}
+          </div>
         </main>
       </div>
     );

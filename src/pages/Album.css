@@ -1,5 +1,9 @@
+:root {
+  --Album-grey-white : #EFF3F9;
+}
+
 .Album-main-container {
-  border: solid red 1px;
+  background-color: var(--Album-grey-white);
   margin-left: 20vw;
 }
 
@@ -7,4 +11,32 @@
   background-image: url('../images/login-background.png'), linear-gradient(135deg,#003BE5 20%, #006de3 30%, #00D5E2 80%);
   background-size: 80vw 100vh;
   height: 33vh;
+}
+
+.Album-artist-album-names {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-left: 24%;
+  margin-top: 12%;
+  position: absolute;
+}
+
+.Album-cover-img {
+  border-radius: 12px;
+  margin-left: 5%;
+  margin-top: 90px;
+  position: absolute;
+  width: 240px;
+}
+
+.Album-tracks-container {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin-right: 5%;
+  margin-top: 5%;
+  padding-bottom: 5%;
 }
