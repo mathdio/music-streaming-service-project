@@ -47,8 +47,8 @@
   font-size: 0.875rem;
   height: 2.5rem;
   text-align: center;
-  width: 60%;
   transition: 0.5s;
+  width: 60%;
 }
 
 .Login-input:focus {

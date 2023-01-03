@@ -104,6 +104,11 @@
   width: 90%;
 }
 
+.Search-album-link {
+  color: var(--Search-album-title-gray);
+  text-decoration: none;
+}
+
 .Search-album-card {
   min-height: 250px;
   width: 200px;
@@ -114,12 +119,10 @@
   width: 100%;
 }
 
-.Search-album-link {
-  color: var(--Search-album-title-gray);
+.Search-album-name {
   font-size: 0.75rem;
   font-weight: 700;
   margin-top: 5px;
-  text-decoration: none;
 }
 
 .Search-artist-name {

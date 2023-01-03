@@ -110,23 +110,26 @@ class Search extends React.Component {
                       const { collectionId, collectionName,
                         artworkUrl100, artistName } = album;
                       return (
-                        <div key={ uuid() } className="Search-album-card">
-                          <img
-                            src={ artworkUrl100 }
-                            alt={ collectionName }
-                            className="Search-album-img"
-                          />
-                          <Link
-                            to={ `/album/${collectionId}` }
-                            data-testid={ `link-to-album-${collectionId}` }
-                            className="Search-album-link"
-                          >
-                            {collectionName}
+                        <Link
+                          to={ `/album/${collectionId}` }
+                          data-testid={ `link-to-album-${collectionId}` }
+                          className="Search-album-link"
+                          key={ uuid() }
+                        >
+                          <div className="Search-album-card">
+                            <img
+                              src={ artworkUrl100 }
+                              alt={ collectionName }
+                              className="Search-album-img"
+                            />
+                            <p className="Search-album-name">
+                              {collectionName}
+                            </p>
                             <p className="Search-artist-name">
                               {artistName}
                             </p>
-                          </Link>
-                        </div>
+                          </div>
+                        </Link>
                       );
                     })}
                   </div>
